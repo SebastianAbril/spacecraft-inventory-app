@@ -1,5 +1,6 @@
 {
   "name": "spacecraft-inventory-app",
+  "homepage": "https://sebastianabril.github.io/spacecraft-inventory-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
