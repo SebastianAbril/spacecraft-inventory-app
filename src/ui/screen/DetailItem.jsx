@@ -20,7 +20,7 @@ const EMPTY_STATE = {
   quantity: ''
 };
 
-export const NewItem = () => {
+export const DetailItem = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(EMPTY_STATE);
 

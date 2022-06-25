@@ -10,7 +10,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { Routes, Route, Link } from 'react-router-dom';
 import { InventoryTable } from './screen/InventoryTable';
-import { NewItem } from './screen/NewItem';
+import { DetailItem } from './screen/DetailItem';
 
 function App() {
   return (
@@ -35,7 +35,8 @@ function App() {
           <Container maxWidth="md" sx={{ pt: 2 }}>
             <Routes>
               <Route path="/" element={<InventoryTable />} />
-              <Route path="/new" element={<NewItem />} />
+              <Route path="/new" element={<DetailItem />} />
+              <Route path="/item/:id" element={<DetailItem />} />
             </Routes>
           </Container>
         </main>

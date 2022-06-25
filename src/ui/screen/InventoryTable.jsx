@@ -9,14 +9,20 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 import { getItems } from '../../core/service/inventoryService';
 
 export function InventoryTable() {
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
 
   const getDataItems = async () => {
     const items = await getItems();
     setItems(items);
+  };
+
+  const onRowClick = (id) => {
+    navigate('/item/' + id, { replace: true });
   };
 
   useEffect(() => {
@@ -48,7 +54,10 @@ export function InventoryTable() {
         </TableHead>
         <TableBody>
           {items.map((item) => (
-            <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableRow
+              key={item.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              onClick={() => onRowClick(item.id)}>
               <TableCell component="th" scope="row">
                 {item.id}
               </TableCell>
