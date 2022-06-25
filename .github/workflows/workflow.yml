@@ -1,5 +1,3 @@
-23 lines (21 sloc)  531 Bytes
-
 name: Github Pages Deploy
 
 on:
