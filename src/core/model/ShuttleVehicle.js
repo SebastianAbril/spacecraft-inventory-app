@@ -8,13 +8,15 @@ class ShuttleVehicle extends Spacecraft {
     this._payLoad = null;
   }
 
-  addPayLoad(spacecraft) {
+  addLoad(spacecraft) {
     if (spacecraft.weight <= this._loadCapacity) {
       this._payLoad = spacecraft;
     } else {
       console.log('Not recomended, will crash');
     }
   }
+
+  releaseLoad() {}
 
   toJSON() {
     const json = super.toJSON();

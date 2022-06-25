@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,8 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import { createItem } from '../../core/service/inventoryService';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createItem, getItemById } from '../../core/service/inventoryService';
 
 const EMPTY_STATE = {
   name: '',
@@ -20,8 +20,10 @@ const EMPTY_STATE = {
   quantity: ''
 };
 
-export const DetailItem = () => {
+export const DetailItemScreen = () => {
   const navigate = useNavigate();
+  const params = useParams();
+
   const [formData, setFormData] = useState(EMPTY_STATE);
 
   const handleChange = (e) => {
@@ -42,6 +44,22 @@ export const DetailItem = () => {
     }
   };
 
+  const loadItemById = async (id) => {
+    const item = await getItemById(id);
+    setFormData({
+      type: item.spacecraft.type,
+      quantity: item.quantity,
+      ...item.spacecraft.toJSON()
+    });
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      loadItemById(params.id);
+    }
+  }, [params.id]);
+  const isEditable = params.id ? true : false;
+
   return (
     <Paper component="form" onSubmit={handleSubmit}>
       <FormControl fullWidth>
@@ -51,6 +69,7 @@ export const DetailItem = () => {
           label="Type"
           name="type"
           required
+          disabled={isEditable}
           value={formData.type}
           onChange={handleChange}>
           <MenuItem value={'ShuttleVehicle'}>ShuttleVehicle</MenuItem>
@@ -66,6 +85,7 @@ export const DetailItem = () => {
         fullWidth
         required
         variant="outlined"
+        disabled={isEditable}
         value={formData.name}
         onChange={handleChange}
       />
@@ -77,6 +97,7 @@ export const DetailItem = () => {
         fullWidth
         required
         variant="outlined"
+        disabled={isEditable}
         value={formData.weight}
         onChange={handleChange}
       />
@@ -88,6 +109,7 @@ export const DetailItem = () => {
         fullWidth
         required
         variant="outlined"
+        disabled={isEditable}
         value={formData.quantity}
         onChange={handleChange}
       />
@@ -102,6 +124,7 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.tonsOfPropulsion}
             onChange={handleChange}
           />
@@ -114,6 +137,7 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.loadCapacity}
             onChange={handleChange}
           />
@@ -130,6 +154,7 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.speed}
             onChange={handleChange}
           />
@@ -142,6 +167,7 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.crewCapacity}
             onChange={handleChange}
           />
@@ -158,6 +184,7 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.speed}
             onChange={handleChange}
           />
@@ -170,15 +197,17 @@ export const DetailItem = () => {
             fullWidth
             required
             variant="outlined"
+            disabled={isEditable}
             value={formData.tonsOfPropulsion}
             onChange={handleChange}
           />
         </>
       )}
-
-      <Button type="submit" fullWidth variant="contained">
-        Save
-      </Button>
+      {isEditable == false && (
+        <Button type="submit" fullWidth variant="contained">
+          Save
+        </Button>
+      )}
     </Paper>
   );
 };
