@@ -7,6 +7,15 @@ class UncrewedSpacecraft extends Spacecraft {
     this._tonsOfPropulsion = tonsOfPropulsion;
   }
 
+  toJSON() {
+    const json = super.toJSON();
+    return {
+      ...json,
+      speed: this._speed,
+      tonsOfPropulsion: this._tonsOfPropulsion
+    };
+  }
+
   get speed() {
     return this._speed;
   }

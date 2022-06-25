@@ -16,6 +16,15 @@ class ShuttleVehicle extends Spacecraft {
     }
   }
 
+  toJSON() {
+    const json = super.toJSON();
+    return {
+      ...json,
+      tonsOfPropulsion: this._tonsOfPropulsion,
+      loadCapacity: this._loadCapacity
+    };
+  }
+
   get tonsOfPropulsion() {
     return this._tonsOfPropulsion;
   }

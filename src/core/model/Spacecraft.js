@@ -10,6 +10,17 @@ class Spacecraft {
   get weight() {
     return this._weight;
   }
+
+  get type() {
+    return this.constructor.name;
+  }
+
+  toJSON() {
+    return {
+      name: this._name,
+      weight: this._weight
+    };
+  }
 }
 
 export { Spacecraft };

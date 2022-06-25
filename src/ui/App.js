@@ -21,7 +21,7 @@ function App() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Spacecraft-Inventory-App
+              Spacecraft Inventory App
             </Typography>
             <Button color="inherit" component={Link} to="/">
               Inventory
@@ -32,7 +32,7 @@ function App() {
           </Toolbar>
         </AppBar>
         <main>
-          <Container maxWidth="sm" sx={{ pt: 2 }}>
+          <Container maxWidth="md" sx={{ pt: 2 }}>
             <Routes>
               <Route path="/" element={<InventoryTable />} />
               <Route path="/new" element={<NewItem />} />

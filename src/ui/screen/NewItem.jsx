@@ -1,21 +1,184 @@
+import { useState } from 'react';
 import Paper from '@mui/material/Paper';
-
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import { createItem } from '../../core/service/inventoryService';
+
+const EMPTY_STATE = {
+  name: '',
+  weight: '',
+  type: 'ShuttleVehicle',
+  speed: '',
+  tonsOfPropulsion: '',
+  loadCapacity: '',
+  crewCapacity: '',
+  quantity: ''
+};
 
 export const NewItem = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState(EMPTY_STATE);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await createItem(formData.quantity, formData.type, formData);
+      navigate('/', { replace: true });
+    } catch (e) {
+      //TODO MANEJO DE ERROS
+    }
+  };
+
   return (
-    <Paper component="form" sx={{ p: '2px 4px' }}>
+    <Paper component="form" onSubmit={handleSubmit}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Age">
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        <InputLabel id="Type">Type</InputLabel>
+        <Select
+          labelId="Type"
+          label="Type"
+          name="type"
+          required
+          value={formData.type}
+          onChange={handleChange}>
+          <MenuItem value={'ShuttleVehicle'}>ShuttleVehicle</MenuItem>
+          <MenuItem value={'UncrewedSpacecraft'}>UncrewedSpacecraft</MenuItem>
+          <MenuItem value={'CrewedSpacecraft'}>CrewedSpacecraft</MenuItem>
         </Select>
       </FormControl>
+      <TextField
+        margin="dense"
+        label="Name"
+        name="name"
+        type="text"
+        fullWidth
+        required
+        variant="outlined"
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <TextField
+        margin="dense"
+        label="Weight"
+        name="weight"
+        type="number"
+        fullWidth
+        required
+        variant="outlined"
+        value={formData.weight}
+        onChange={handleChange}
+      />
+      <TextField
+        margin="dense"
+        label="Quantity"
+        name="quantity"
+        type="number"
+        fullWidth
+        required
+        variant="outlined"
+        value={formData.quantity}
+        onChange={handleChange}
+      />
+
+      {formData.type === 'ShuttleVehicle' && (
+        <>
+          <TextField
+            margin="dense"
+            label="Tons Of Propulsion"
+            name="tonsOfPropulsion"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.tonsOfPropulsion}
+            onChange={handleChange}
+          />
+
+          <TextField
+            margin="dense"
+            label="Load Capacity"
+            name="loadCapacity"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.loadCapacity}
+            onChange={handleChange}
+          />
+        </>
+      )}
+
+      {formData.type === 'CrewedSpacecraft' && (
+        <>
+          <TextField
+            margin="dense"
+            label="Speed"
+            name="speed"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.speed}
+            onChange={handleChange}
+          />
+
+          <TextField
+            margin="dense"
+            label="Crew Capacity"
+            name="crewCapacity"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.crewCapacity}
+            onChange={handleChange}
+          />
+        </>
+      )}
+
+      {formData.type === 'UncrewedSpacecraft' && (
+        <>
+          <TextField
+            margin="dense"
+            label="Speed"
+            name="speed"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.speed}
+            onChange={handleChange}
+          />
+
+          <TextField
+            margin="dense"
+            label="Tons Of Propulsion"
+            name="tonsOfPropulsion"
+            type="number"
+            fullWidth
+            required
+            variant="outlined"
+            value={formData.tonsOfPropulsion}
+            onChange={handleChange}
+          />
+        </>
+      )}
+
+      <Button type="submit" fullWidth variant="contained">
+        Save
+      </Button>
     </Paper>
   );
 };

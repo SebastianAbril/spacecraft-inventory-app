@@ -7,6 +7,15 @@ class CrewedSpacecraft extends Spacecraft {
     this._crewCapacity = crewCapacity;
   }
 
+  toJSON() {
+    const json = super.toJSON();
+    return {
+      ...json,
+      speed: this._speed,
+      crewCapacity: this._crewCapacity
+    };
+  }
+
   get speed() {
     return this._speed;
   }
