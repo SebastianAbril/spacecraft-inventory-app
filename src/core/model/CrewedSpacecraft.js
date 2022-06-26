@@ -16,6 +16,10 @@ class CrewedSpacecraft extends Spacecraft {
     };
   }
 
+  getType() {
+    return 'CrewedSpacecraft';
+  }
+
   get speed() {
     return this._speed;
   }

@@ -47,7 +47,7 @@ export const DetailItemScreen = () => {
   const loadItemById = async (id) => {
     const item = await getItemById(id);
     setFormData({
-      type: item.spacecraft.type,
+      type: item.spacecraft.getType(),
       quantity: item.quantity,
       ...item.spacecraft.toJSON()
     });

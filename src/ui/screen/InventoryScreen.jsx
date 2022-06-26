@@ -72,7 +72,7 @@ export function InventoryScreen() {
                 {item.id}
               </TableCell>
               <TableCell>{item.spacecraft.name}</TableCell>
-              <TableCell>{item.spacecraft.type}</TableCell>
+              <TableCell>{item.spacecraft.getType()}</TableCell>
               <TableCell align="right">{item.quantity}</TableCell>
             </TableRow>
           ))}

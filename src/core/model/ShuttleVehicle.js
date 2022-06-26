@@ -27,6 +27,10 @@ class ShuttleVehicle extends Spacecraft {
     };
   }
 
+  getType() {
+    return 'ShuttleVehicle';
+  }
+
   get tonsOfPropulsion() {
     return this._tonsOfPropulsion;
   }

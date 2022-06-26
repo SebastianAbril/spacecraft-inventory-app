@@ -16,6 +16,10 @@ class UncrewedSpacecraft extends Spacecraft {
     };
   }
 
+  getType() {
+    return 'UncrewedSpacecraft';
+  }
+
   get speed() {
     return this._speed;
   }

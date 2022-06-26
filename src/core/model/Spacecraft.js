@@ -11,8 +11,8 @@ class Spacecraft {
     return this._weight;
   }
 
-  get type() {
-    return this.constructor.name;
+  getType() {
+    return 'Spacecraft';
   }
 
   toJSON() {
