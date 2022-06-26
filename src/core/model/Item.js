@@ -1,3 +1,6 @@
+/**
+ * this a class that contains all the information to be displayed in `InventoryScreen`, its attributes are: id, quantity, createAt and spacecraft.
+ */
 export class Item {
   constructor(id, quantity, createAt, spacecraft) {
     this._id = id;

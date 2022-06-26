@@ -1,5 +1,9 @@
 import { Spacecraft } from './Spacecraft';
 
+/**
+ * the `ShuttleVehicle` is used to launch a load into space, this class extends from `Spacecraft` class and its atrributes are: tonsOfPropulsion, loadCapacity and load.
+ * The methods are `addLoad()` , `releaseLoad()` , `getType()` and `toJSON`.The last two methods are overwrited in order to change their behavior.
+ */
 class ShuttleVehicle extends Spacecraft {
   constructor(name, weight, tonsOfPropulsion, loadCapacity) {
     super(name, weight);

@@ -11,9 +11,16 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { InventoryScreen } from './screen/InventoryScreen';
 import { DetailItemScreen } from './screen/DetailItemScreen';
 
+// CSSBaseline is a normalize.css
+
 function App() {
   return (
-    <React.Fragment>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh'
+      }}>
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -39,7 +46,28 @@ function App() {
           </Container>
         </main>
       </Box>
-    </React.Fragment>
+
+      <Box
+        component="footer"
+        sx={{
+          py: 1,
+          px: 2,
+          mt: 'auto',
+          backgroundColor: 'primary.main'
+        }}>
+        <Container maxWidth="md">
+          <Typography align="center" variant="body1" color="white">
+            Made by Sebastian Abril
+          </Typography>
+          <Typography variant="body2" color="white" align="center">
+            {'Copyright © '}
+
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
+        </Container>
+      </Box>
+    </Box>
   );
 }
 
