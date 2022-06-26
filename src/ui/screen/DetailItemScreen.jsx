@@ -104,7 +104,7 @@ export const DetailItemScreen = () => {
       />
       <TextField
         margin="dense"
-        label="Weight"
+        label="Weight [Ton]"
         name="weight"
         type="number"
         fullWidth
@@ -130,7 +130,7 @@ export const DetailItemScreen = () => {
         <>
           <TextField
             margin="dense"
-            label="Tons Of Propulsion"
+            label="Tons Of Propulsion [Ton]"
             name="tonsOfPropulsion"
             type="number"
             fullWidth
@@ -143,7 +143,7 @@ export const DetailItemScreen = () => {
 
           <TextField
             margin="dense"
-            label="Load Capacity"
+            label="Load Capacity [Ton]"
             name="loadCapacity"
             type="number"
             fullWidth
@@ -160,7 +160,7 @@ export const DetailItemScreen = () => {
         <>
           <TextField
             margin="dense"
-            label="Speed"
+            label="Speed [Km/h]"
             name="speed"
             type="number"
             fullWidth
@@ -173,7 +173,7 @@ export const DetailItemScreen = () => {
 
           <TextField
             margin="dense"
-            label="Crew Capacity"
+            label="Crew Capacity [persons]"
             name="crewCapacity"
             type="number"
             fullWidth
@@ -190,7 +190,7 @@ export const DetailItemScreen = () => {
         <>
           <TextField
             margin="dense"
-            label="Speed"
+            label="Speed [Km/h]"
             name="speed"
             type="number"
             fullWidth
@@ -203,7 +203,7 @@ export const DetailItemScreen = () => {
 
           <TextField
             margin="dense"
-            label="Tons Of Propulsion"
+            label="Tons Of Propulsion [Tons]"
             name="tonsOfPropulsion"
             type="number"
             fullWidth
