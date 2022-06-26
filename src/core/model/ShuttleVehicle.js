@@ -5,18 +5,26 @@ class ShuttleVehicle extends Spacecraft {
     super(name, weight);
     this._tonsOfPropulsion = tonsOfPropulsion;
     this._loadCapacity = loadCapacity;
-    this._payLoad = null;
+    this._load = null;
   }
 
   addLoad(spacecraft) {
     if (spacecraft.weight <= this._loadCapacity) {
-      this._payLoad = spacecraft;
+      this._load = spacecraft;
     } else {
-      console.log('Not recomended, will crash');
+      throw new Error('The spacecraft weight is greater than the maximun load capacity');
     }
   }
 
-  releaseLoad() {}
+  releaseLoad() {
+    if (this._load == null) {
+      throw new Error('There is not current load to be released');
+    }
+
+    const currentLoad = this._load;
+    this._load = null;
+    return currentLoad;
+  }
 
   toJSON() {
     const json = super.toJSON();

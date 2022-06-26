@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { Item } from '../model/Item';
-import { getSpacecraftFactory } from '../model/getSpacecraftFactory';
+import { SpacecraftFactory } from '../model/SpacecraftFactory';
 
 export const itemConverter = {
   toFirestore(item) {
@@ -13,7 +13,12 @@ export const itemConverter = {
   },
   fromFirestore(snapshot, options) {
     const data = snapshot.data(options);
-    const spacecraft = getSpacecraftFactory(data.type, data.spacecraft);
-    return new Item(snapshot.id, data.quantity, data.createAt, spacecraft);
+    const spacecraft = SpacecraftFactory.get(data.type, data.spacecraft);
+    return new Item(
+      snapshot.id,
+      data.quantity,
+      new Date(data.createdAt.seconds * 1000), // La fecha de Firestore no es compatible con la otra
+      spacecraft
+    );
   }
 };

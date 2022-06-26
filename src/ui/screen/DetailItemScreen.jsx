@@ -6,8 +6,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createItem, getItemById } from '../../core/service/inventoryService';
+import {
+  createItem,
+  getItemById,
+  deleteItemById,
+  updateItemQuantityById
+} from '../../core/service/inventoryService';
 
 const EMPTY_STATE = {
   name: '',
@@ -36,12 +42,8 @@ export const DetailItemScreen = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await createItem(formData.quantity, formData.type, formData);
-      navigate('/', { replace: true });
-    } catch (e) {
-      //TODO MANEJO DE ERROS
-    }
+    await createItem(formData.quantity, formData.type, formData);
+    navigate('/', { replace: true });
   };
 
   const loadItemById = async (id) => {
@@ -53,11 +55,22 @@ export const DetailItemScreen = () => {
     });
   };
 
+  const onUpdate = async () => {
+    await updateItemQuantityById(params.id, formData.quantity);
+    navigate('/', { replace: true });
+  };
+
+  const onDelete = async () => {
+    await deleteItemById(params.id);
+    navigate('/', { replace: true });
+  };
+
   useEffect(() => {
     if (params.id) {
       loadItemById(params.id);
     }
   }, [params.id]);
+
   const isEditable = params.id ? true : false;
 
   return (
@@ -109,7 +122,6 @@ export const DetailItemScreen = () => {
         fullWidth
         required
         variant="outlined"
-        disabled={isEditable}
         value={formData.quantity}
         onChange={handleChange}
       />
@@ -203,11 +215,25 @@ export const DetailItemScreen = () => {
           />
         </>
       )}
-      {isEditable == false && (
-        <Button type="submit" fullWidth variant="contained">
-          Save
-        </Button>
-      )}
+
+      <Stack spacing={2} direction="row">
+        {isEditable == false && (
+          <Button type="submit" fullWidth variant="contained">
+            Save
+          </Button>
+        )}
+
+        {isEditable == true && (
+          <>
+            <Button onClick={onDelete} fullWidth variant="contained" color="error">
+              Delete
+            </Button>
+            <Button onClick={onUpdate} fullWidth variant="contained">
+              Update
+            </Button>
+          </>
+        )}
+      </Stack>
     </Paper>
   );
 };

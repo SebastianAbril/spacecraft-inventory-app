@@ -59,6 +59,7 @@ export function InventoryScreen() {
             <TableCell>Id</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Type</TableCell>
+            <TableCell>Create At</TableCell>
             <TableCell align="right">Quantity</TableCell>
           </TableRow>
         </TableHead>
@@ -66,6 +67,7 @@ export function InventoryScreen() {
           {items.map((item) => (
             <TableRow
               key={item.id}
+              hover={true}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => onRowClick(item.id)}>
               <TableCell component="th" scope="row">
@@ -73,6 +75,7 @@ export function InventoryScreen() {
               </TableCell>
               <TableCell>{item.spacecraft.name}</TableCell>
               <TableCell>{item.spacecraft.getType()}</TableCell>
+              <TableCell>{item.createAt.toLocaleString()}</TableCell>
               <TableCell align="right">{item.quantity}</TableCell>
             </TableRow>
           ))}
