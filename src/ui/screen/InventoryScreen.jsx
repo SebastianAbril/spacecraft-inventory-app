@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { getItems } from '../../core/service/inventoryService';
 
-export function InventoryScreen() {
+export function InventoryScreen() { 
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [searchValue, setSearchValue] = useState('');
